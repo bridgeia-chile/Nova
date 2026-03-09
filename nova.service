@@ -1,0 +1,27 @@
+[Unit]
+Description=Nova AI Assistant
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=dietpi
+Group=dietpi
+WorkingDirectory=/mnt/dietpi_userdata/projects/nova
+ExecStart=/usr/bin/node /mnt/dietpi_userdata/projects/nova/dist/src/index.js
+Restart=always
+RestartSec=5
+Environment=NODE_ENV=production
+Environment=NOVA_CONFIG=/mnt/dietpi_userdata/projects/nova/config/nova.config.prod.json
+StandardOutput=append:/mnt/dietpi_userdata/nova_logs/nova.out.log
+StandardError=append:/mnt/dietpi_userdata/nova_logs/nova.err.log
+
+# Performance optimizations for Raspberry Pi
+Nice=5
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7
+CPUQuota=80%
+MemoryLimit=2G
+
+[Install]
+WantedBy=multi-user.target

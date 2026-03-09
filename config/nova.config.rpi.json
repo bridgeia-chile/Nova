@@ -1,0 +1,85 @@
+{
+  "nova": {
+    "version": "0.1.0",
+    "name": "Nova",
+    "description": "AI Assistant - Raspberry Pi Edition",
+    "environment": "raspberry-pi",
+    "core": {
+      "modelProvider": "openai",
+      "defaultModel": "gpt-3.5-turbo",
+      "temperature": 0.7,
+      "maxTokens": 500,
+      "concurrency": 2,
+      "rateLimit": {
+        "requestsPerMinute": 30,
+        "burstLimit": 5
+      }
+    },
+    "gateway": {
+      "port": 18789,
+      "host": "0.0.0.0",
+      "enableWebsocket": true,
+      "enableRestAPI": true,
+      "maxConnections": 10,
+      "keepAliveTimeout": 30000
+    },
+    "channels": {
+      "enabled": ["cli"],
+      "available": ["cli", "web"],
+      "cli": {
+        "historySize": 50,
+        "maxInputLength": 1000
+      }
+    },
+    "plugins": {
+      "pluginDir": "./plugins",
+      "enabled": [],
+      "sandboxEnabled": true,
+      "autoLoad": false
+    },
+    "memory": {
+      "provider": "sqlite",
+      "persistence": true,
+      "storagePath": "/mnt/dietpi_userdata/nova_data",
+      "maxHistory": 1000,
+      "cleanupInterval": "0 3 * * *"  # Daily at 3 AM
+    },
+    "logging": {
+      "level": "info",
+      "file": "/mnt/dietpi_userdata/nova_logs/nova.log",
+      "maxSize": "10m",
+      "maxFiles": 3,
+      "consoleLevel": "warn"
+    },
+    "performance": {
+      "lowMemoryMode": true,
+      "reduceConcurrency": true,
+      "gcInterval": 3600000,
+      "maxOldSpaceSize": 1024
+    },
+    "raspberryPi": {
+      "optimized": true,
+      "thermalProtection": {
+        "enabled": true,
+        "maxTemp": 75,
+        "throttleTemp": 70
+      },
+      "storage": {
+        "useExternal": true,
+        "externalPath": "/mnt/dietpi_userdata"
+      }
+    },
+    "security": {
+      "enableAuth": false,
+      "cors": {
+        "enabled": true,
+        "origins": ["http://localhost:18789", "http://<your-pi-ip>:18789"]
+      }
+    }
+  },
+  "development": false,
+  "telemetry": {
+    "enabled": false,
+    "anonymous": true
+  }
+}

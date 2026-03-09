@@ -1,0 +1,56 @@
+# Node dependencies
+node_modules/
+
+# Logs
+temp/
+*.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Build output
+/dist/
+/build/
+
+# Environment files
+.env
+.env.local
+.env*.local
+
+# Dependency directories
+jspm_packages/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# npm debug log
+npm-debug.log*
+
+# Yarn debug log
+yarn-debug.log*
+yarn-error.log*
+
+# Local History for Visual Studio Code
+.history/
+
+# openclaw-reference directory (large, not needed for installation)
+openclaw-reference/
+
+# Data directories (created during runtime)
+data/
+logs/
+
+# DietPi specific
+/mnt/dietpi_userdata/nova_data
+/mnt/dietpi_userdata/nova_logs
